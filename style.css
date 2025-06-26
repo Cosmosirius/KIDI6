@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Fredoka:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+  --font-cherry: "Cherry Bomb One", system-ui;
+  --font-fredoka: "Fredoka", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+  --color1: WhiteSmoke;
+  --color2: #4F3F3E;
+  --color3: #E5DACA;
+  --color4: DarkKhaki;
+  --color6: #FFCC80;
+  --color7: #EA7D70;
+  --color8: LightSteelBlue;
+  --color9: Lavender;
+  --color10: SlateBlue;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-fredoka);
+}
+
+body {
+  background-image: url(assets/bg.svg);
+  background-size: 50vh;
+  background-color: var(--color10);
+}
+
+h1 {
+  font-family: var(--font-cherry);
+}
+
+span {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+header,
+footer {
+  background-color: var(--color4);
+  border: var(--color2) solid 8px;
+  color: var(--color1);
+  border-radius: 0 0 60px 60px;
+}
+
+#snack-rack,
+#drink-rack {
+  margin: 0 4vw;
+  border-radius: 2em;
+  background-color: var(--color1);
+  border: var(--color2) solid 1em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.snack-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 1em;
+  background-color: var(--color3);
+  border: none;
+  text-decoration: none;
+  border-radius: 1em;
+  white-space: nowrap;
+}
+
+.snack-item:hover {
+  transform: scale(1.05);
+}
+
+.snack-item img {
+  width: 25vh;
+}
+
+.snack-item p {
+  margin: 0;
+  padding: 0 0.5rem;
+  background-color: var(--color1);
+  border-radius: 100vh;
+}
+
+.snack-item span {
+  padding: 0 0.5rem;
+  background-color: var(--color1);
+  border-radius: 100vh;
+}
+
+
+::-webkit-scrollbar {
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color7);
+  border-radius: 100vh;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;       
+}
+
