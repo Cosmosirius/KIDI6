@@ -159,12 +159,74 @@ snacks.forEach(snack => {
     });
 
     (snack.category === "snack" ? snackRack : drinkRack).appendChild(item);
+
+    // Filter Discount
+    document.getElementById("filterDiscountBtn").addEventListener("click", () => {
+        const snackDiscount = snacks.filter(item => item.category === "snack" && item.discount > 0);
+        const drinkDiscount = snacks.filter(item => item.category === "drink" && item.discount > 0);
+        renderFilteredRacks(snackDiscount, drinkDiscount);
+    });
+
+    // Sortir Harga
+    document.getElementById("sortPriceForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const min = parseInt(document.getElementById("minPrice").value) || 0;
+        const max = parseInt(document.getElementById("maxPrice").value) || Infinity;
+        const snackSorted = snacks.filter(item => item.category === "snack" && item.price >= min && item.price <= max);
+        const drinkSorted = snacks.filter(item => item.category === "drink" && item.price >= min && item.price <= max);
+        renderFilteredRacks(snackSorted, drinkSorted);
+
+        // Tutup modal Bootstrap
+        const modal = bootstrap.Modal.getInstance(document.getElementById("sortPriceModal"));
+        modal.hide();
+    });
+
+    // Fungsi render ulang rack sesuai filter
+    function renderFilteredRacks(snackItems, drinkItems) {
+        snackRack.innerHTML = "";
+        drinkRack.innerHTML = "";
+
+        [...snackItems, ...drinkItems].forEach(snack => {
+            const item = document.createElement("button");
+            item.className = "item";
+            item.setAttribute("data-id", snack.id);
+
+            let currentQty = cart.find(i => i.id === snack.id)?.qty || 0;
+
+            item.innerHTML = `
+            <img src="assets/${snack.id}.png">
+            <p>${snack.name} <span class="tag-price">¥${snack.price}</span></p>
+            ${currentQty > 0 ? `<div class="qty-badge">${currentQty}</div>` : ""}
+        `;
+            const tagPrice = item.querySelector(".tag-price");
+            tagPrice.style.backgroundColor = snack.discount > 0 ? `#EA7D70` : `#ABCDDE`;
+
+            item.addEventListener("click", () => {
+                const exist = cart.find(i => i.id === snack.id);
+                if (exist) {
+                    exist.qty += 1;
+                } else {
+                    cart.push({ ...snack, qty: 1 });
+                }
+                renderFilteredRacks(snackItems, drinkItems);
+                updateCartListDisplay();
+            });
+
+            (snack.category === "snack" ? snackRack : drinkRack).appendChild(item);
+        });
+    }
+    document.getElementById("resetFilterBtn").addEventListener("click", () => {
+        const snackItems = snacks.filter(item => item.category === "snack");
+        const drinkItems = snacks.filter(item => item.category === "drink");
+        renderFilteredRacks(snackItems, drinkItems);
+    });
 });
+
 
 const buyBtn = document.getElementById("BuyBtn");
 buyBtn.addEventListener("click", () => {
     window.location.href = "buy.html";
-  });
+});
 
 function handleBuy() {
     if (cart.length === 0) {

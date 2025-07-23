@@ -20,6 +20,60 @@
       <h1 class="display-4 text-center">コンビニ | KONBINI</h1>
     </header>
 
+    <!-- Filter Buttons -->
+    <div class="container-fluid d-flex gap-2 pt-3 px-5">
+      <button id="filterDiscountBtn" class="btn btn-filter">
+        Discount
+      </button>
+      <button
+        id="sortPriceBtn"
+        class="btn btn-filter"
+        data-bs-toggle="modal"
+        data-bs-target="#sortPriceModal"
+      >
+        Sort
+      </button>
+      <button id="resetFilterBtn" class="btn btn-filter">All</button>
+    </div>
+
+    <!-- Modal for Sort Price -->
+    <div
+      class="modal fade"
+      id="sortPriceModal"
+      tabindex="-1"
+      aria-labelledby="sortPriceModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <form id="sortPriceForm" class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sortPriceModalLabel">
+              Sortir Berdasarkan Harga
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body d-flex flex-column gap-2">
+            <label
+              >Min Price (¥):
+              <input type="number" id="minPrice" class="form-control" min="0"
+            /></label>
+            <label
+              >Max Price (¥):
+              <input type="number" id="maxPrice" class="form-control" min="0"
+            /></label>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Sortir</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- Showcase Snacks -->
     <section class="container-fluid d-grid py-4 gap-3 mb-5">
       <div id="snack-rack" class="d-flex gap-3 flex-nowrap py-3 px-3"></div>
